@@ -145,7 +145,7 @@ export default function Disclaimer() {
       <p>
         <strong>Email:</strong> support@familylegacycoverage.com
         <br />
-        <strong>Phone:</strong> (your number)
+        <strong>Phone:</strong> 502-257-6243
       </p>
     </div>
   );

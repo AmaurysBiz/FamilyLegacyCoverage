@@ -109,7 +109,7 @@ export default function PrivacyPolicy() {
       <p>
         Email: support@familylegacycoverage.com  
         <br />
-        Phone: (your number)
+        Phone: 502-257-6243
       </p>
     </div>
   );
