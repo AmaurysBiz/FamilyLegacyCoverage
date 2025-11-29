@@ -1,0 +1,143 @@
+/* ============================
+   NAVBAR BASE
+   ============================ */
+.navbar {
+  background-color: #0047AB !important;
+  padding: 0.75rem 0;
+  border-bottom: none;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Remove potential body gaps */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ============================
+   NAVBAR CONTAINER
+   ============================ */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+/* ============================
+   LOGO
+   ============================ */
+.logo a {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #ffffff !important;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+/* ============================
+   MENU LINKS
+   ============================ */
+.menu {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.menu a,
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.menu a:hover,
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+/* ============================
+   DROPDOWN
+   ============================ */
+.nav-item {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0; /* LEFT ALIGN FIX */
+  background-color: #ffffff;
+  color: #222;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  padding: 0.7rem 0;
+  list-style: none;
+  margin: 0;
+  z-index: 9999;
+  width: 260px;
+}
+
+.dropdown-menu li {
+  padding: 0.6rem 1rem;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f2f5;
+}
+
+.dropdown-menu li a {
+  color: #222 !important;
+  text-decoration: none;
+  display: block;
+  font-size: 1rem; /* FIXED from 2rem */
+  font-weight: 500;
+}
+
+/* ============================
+   MOBILE MENU
+   ============================ */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    background-color: #0047AB;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    display: none;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .menu.active {
+    display: flex;
+  }
+
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
