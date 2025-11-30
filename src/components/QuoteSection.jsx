@@ -36,6 +36,23 @@ const QuoteSection = () => {
         }),
       });
 
+       // 🔥 FIRE META LEAD EVENT
+    if (window.fbq) {
+      fbq('track', 'Lead', {
+        content_name: `Lead from ${formData.state}`,
+        status: "Form Submit"
+      });
+    }
+
+    // 🔥 FIRE GA4 LEAD EVENT
+    if (window.gtag) {
+      gtag('event', 'generate_lead', {
+        event_category: 'Lead',
+        event_label: 'Quote Form',
+        value: 1
+      });
+    }
+
       alert(
         "Your request was submitted! An agent will contact you shortly."
       );
