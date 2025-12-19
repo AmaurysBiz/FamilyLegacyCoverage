@@ -1,3 +1,6 @@
+/* global fbq, gtag */
+
+
 import React, { useState } from "react";
 import "./QuoteSection.css";
 
