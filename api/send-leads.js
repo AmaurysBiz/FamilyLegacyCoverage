@@ -20,13 +20,19 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
+    // 🔥 Create transporter using Gmail SMTP (more reliable in Vercel)
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
+
+    // 🔍 Verify connection (important for debugging in Vercel)
+    await transporter.verify();
 
     const emailBody = `
 🔥 NEW LEAD – Family Legacy Coverage
@@ -41,39 +47,38 @@ Wants 5-minute call: ${fastContact ? "YES" : "No"}
 Call immediately if possible.
 `;
 
-    // 1️⃣ Send normal email to Gmail
+    // 1️⃣ Send normal email
     await transporter.sendMail({
       from: `"Family Legacy Coverage" <${process.env.EMAIL_USER}>`,
-      to: "marcellus.aren2018@gmail.com",
+      to: process.env.EMAIL_USER,
       subject: "🔥 NEW LEAD – Call ASAP",
       text: emailBody,
     });
 
-    // 2️⃣ Send SMS alert via Cricket email gateway
-    // Replace with your actual Cricket number (10 digits only)
+    // 2️⃣ Send SMS via Cricket email gateway
     const cricketNumber = "5025034537@sms.cricketwireless.net";
 
     const smsBody = `NEW FLC LEAD
 ${fullName}
 ${phone}
 ${state || ""}
-Call NOW.`;
+CALL NOW`;
 
     try {
       await transporter.sendMail({
         from: `"FLC Alerts" <${process.env.EMAIL_USER}>`,
         to: cricketNumber,
-        subject: "", // SMS gateways ignore subject
+        subject: "",
         text: smsBody,
       });
     } catch (smsError) {
       console.error("SMS gateway error:", smsError);
-      // Do NOT fail the whole request if SMS fails
+      // Do not fail entire request if SMS fails
     }
 
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Email send error:", err);
+    console.error("EMAIL SEND ERROR:", err);
     return res.status(500).json({ error: "Failed to process lead" });
   }
 }
