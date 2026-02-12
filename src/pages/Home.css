@@ -1,0 +1,48 @@
+/* ================================
+   HOME ACTION BANNER
+   ================================ */
+
+.home-action-banner {
+  background: #f5f8fc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.home-action-text {
+  font-size: 1.05rem;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.home-action-link {
+  color: #0047AB;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.home-action-link:hover {
+  text-decoration: none;
+}
+
+.section-divider {
+  width: 100%;
+  max-width: 1200px;
+  height: 1px;
+  margin: 80px auto 60px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 0.08),
+    transparent
+  );
+}
+
+
+/* Mobile tuning */
+@media (max-width: 768px) {
+  .home-action-text {
+    font-size: 1rem;
+  }
+}

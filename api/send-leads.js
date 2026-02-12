@@ -1,0 +1,79 @@
+import nodemailer from "nodemailer";
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  try {
+    const {
+      fullName,
+      phone,
+      city,
+      state,
+      coverageFor,
+      preferredCallTime,
+      fastContact,
+    } = req.body;
+
+    if (!fullName || !phone || !preferredCallTime) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const emailBody = `
+🔥 NEW LEAD – Family Legacy Coverage
+
+Name: ${fullName}
+Phone: ${phone}
+Location: ${city || "N/A"}, ${state || "N/A"}
+Coverage For: ${coverageFor || "N/A"}
+Preferred Call Time: ${preferredCallTime}
+Wants 5-minute call: ${fastContact ? "YES" : "No"}
+
+Call immediately if possible.
+`;
+
+    // 1️⃣ Send normal email to Gmail
+    await transporter.sendMail({
+      from: `"Family Legacy Coverage" <${process.env.EMAIL_USER}>`,
+      to: "marcellus.aren2018@gmail.com",
+      subject: "🔥 NEW LEAD – Call ASAP",
+      text: emailBody,
+    });
+
+    // 2️⃣ Send SMS alert via Cricket email gateway
+    // Replace with your actual Cricket number (10 digits only)
+    const cricketNumber = "5025034537@sms.cricketwireless.net";
+
+    const smsBody = `NEW FLC LEAD
+${fullName}
+${phone}
+${state || ""}
+Call NOW.`;
+
+    try {
+      await transporter.sendMail({
+        from: `"FLC Alerts" <${process.env.EMAIL_USER}>`,
+        to: cricketNumber,
+        subject: "", // SMS gateways ignore subject
+        text: smsBody,
+      });
+    } catch (smsError) {
+      console.error("SMS gateway error:", smsError);
+      // Do NOT fail the whole request if SMS fails
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Email send error:", err);
+    return res.status(500).json({ error: "Failed to process lead" });
+  }
+}
