@@ -1,58 +1,108 @@
 .quote-section {
-  display: flex;
-  justify-content: space-between;
-  gap: 4rem;
-  padding: 3rem 2rem;
+  padding: 4rem 2rem;
   background-color: #f9f9f9;
   border-radius: 10px;
   max-width: 1200px;
   margin: 3rem auto;
-  flex-wrap: wrap;
 }
 
-.quote-description {
-  flex: 1;
-  min-width: 280px;
-  font-size: 1.1rem;
-  line-height: 1.7;
+/* Header */
+.quote-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
-.quote-description h2 {
-  font-size: 1.8rem;
+.quote-header h2 {
+  font-size: 2rem;
   color: #003366;
   margin-bottom: 1rem;
 }
 
+.quote-header p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* GRID LAYOUT — This is the fix */
+.quote-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* LEFT SIDE */
+.quote-left {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.quote-left h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #003366;
+}
+
+.quote-left ul {
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+}
+
+.quote-left li {
+  margin-bottom: 0.6rem;
+}
+
+.form-disclaimer {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 1.5rem;
+  line-height: 1.5;
+}
+
+/* RIGHT SIDE */
 .quote-form {
-  flex: 1;
-  min-width: 280px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-size: 1.05rem;
 }
 
 .quote-form input,
 .quote-form select {
-  padding: 0.7rem;
+  padding: 0.85rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
+  transition: border 0.2s ease;
 }
 
-.quote-form label {
-  font-weight: bold;
+.quote-form input:focus,
+.quote-form select:focus {
+  border: 1px solid #0047AB;
+  outline: none;
+}
+
+.fast-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-error {
+  color: #cc0000;
+  font-size: 0.9rem;
 }
 
 .quote-form button {
   background-color: #0047AB;
   color: white;
-  padding: 0.8rem;
-  font-size: 1rem;
+  padding: 1rem;
+  font-size: 1.05rem;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  width: 100%;
   transition: background-color 0.3s ease;
 }
 
@@ -60,8 +110,26 @@
   background-color: #003B91;
 }
 
-@media (max-width: 768px) {
-  .quote-section {
-    flex-direction: column;
+.quote-form button:disabled {
+  background-color: #7da6e6;
+  cursor: not-allowed;
+}
+
+/* Confirmation */
+.quote-confirmation {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote-confirmation h2 {
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .quote-content {
+    grid-template-columns: 1fr;
   }
 }

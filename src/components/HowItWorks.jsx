@@ -16,8 +16,11 @@ const HowItWorks = () => {
 
         <div className="how-card">
           <div className="how-number">2</div>
-          <h3>Talk to an Agent</h3>
-          <p>We’ll call to walk you through your best options in minutes.</p>
+          <h3>Talk to a Licensed Agent</h3>
+          <p>
+            A licensed independent agent will call you, explain your options,
+            and provide their state license number for full transparency.
+          </p>
         </div>
 
         <div className="how-card">
